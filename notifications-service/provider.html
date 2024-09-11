@@ -1,0 +1,34 @@
+<html lang="en">
+  <head>
+    <script src="bundle.js"></script>
+    <meta charset="utf-8" />
+    <title>Notifications Service</title>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./service-worker.js');
+        });
+      }
+    </script>
+  </head>
+
+  <body>
+    <h3>Notifications Service Provider</h3>
+    <button
+      onclick="fin.System.showDeveloperTools({uuid: 'notifications-service', name: 'notifications-service'})"
+    >
+      Show Debugger
+    </button>
+
+    <button onclick="restart()">Restart</button>
+
+    <script>
+      function restart() {
+        fin.Application.getCurrentSync()
+          .getChildWindows()
+          .then((children) => children.forEach((win) => win.close()));
+        window.location.reload();
+      }
+    </script>
+  </body>
+</html>
